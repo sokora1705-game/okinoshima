@@ -1,0 +1,1041 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>沖の島の宝、ひとつ足りない</title>
+<meta name="description" content="川で拾われた若者と、三つの仲間。沖の島から持ち帰った宝が、ひとつ消えた。食いちがう証言を崩して、消えた「隠れ蓑」のゆくえを解き明かす推理ゲーム。">
+<meta name="theme-color" content="#efe2c6">
+<!-- OGP：公開先 GitHub Pages のURL。公開先を変えたら、ここの3か所を書きかえる -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="沖の島の宝、ひとつ足りない">
+<meta property="og:description" content="川で拾われた若者と、三つの仲間。沖の島から持ち帰った宝が、ひとつ消えた。さいごまで解いたとき、あなたはこの話を「知っていた」ことに気づく。">
+<meta property="og:image" content="https://sokora1705-game.github.io/okinoshima/okinoshima-ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="海に浮かぶ島と小舟、宝の目録。沖の島の宝、ひとつ足りない">
+<meta property="og:url" content="https://sokora1705-game.github.io/okinoshima/">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="沖の島の宝、ひとつ足りない">
+<meta name="twitter:description" content="食いちがう証言を崩して、消えた「隠れ蓑」のゆくえを解き明かす推理ゲーム。">
+<meta name="twitter:image" content="https://sokora1705-game.github.io/okinoshima/okinoshima-ogp.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23bcdbe8'/%3E%3Cpath d='M8 42 Q32 30 56 42 L56 62 L8 62Z' fill='%236fa7c4'/%3E%3Cpath d='M18 40 Q32 18 46 40Z' fill='%2393bf7e' stroke='%234a3628' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#fbf3e2;
+  --ink:#4a3628;
+  --ink-soft:#7a6250;
+  --line:#e2cfae;
+  --rose:#f3a39a;
+  --rose-deep:#e2786c;
+  --leaf:#93bf7e;
+  --leaf-deep:#5f9a4c;
+  --sky:#bcdbe8;
+  --sea:#6fa7c4;
+  --red:#d9604f;
+  --bg:#efe2c6;
+  --shadow:0 4px 0 rgba(120,90,60,.18), 0 10px 24px rgba(120,90,60,.12);
+  --radius:22px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg);
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(255,255,255,.5) 0 120px, transparent 121px),
+    radial-gradient(circle at 85% 90%, rgba(188,219,232,.35) 0 160px, transparent 161px);
+  color:var(--ink);
+  font-family:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino Sans","Yu Gothic",sans-serif;
+  line-height:1.8;
+  min-height:100vh;min-height:100dvh;
+}
+button,input{font-family:inherit;color:inherit}
+#app{
+  max-width:560px;margin:0 auto;
+  padding:16px 16px calc(24px + env(safe-area-inset-bottom));
+  min-height:100vh;min-height:100dvh;
+  display:flex;flex-direction:column;
+}
+.page{
+  background:var(--paper);
+  background-image:repeating-linear-gradient(0deg, rgba(160,120,70,.035) 0 2px, transparent 2px 6px);
+  border:3px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:22px 20px;position:relative;
+}
+.page + .page{margin-top:14px}
+.fade{animation:fade .45s ease both}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h1,h2,h3{margin:0;font-weight:900;line-height:1.4}
+h1{font-size:1.7rem;letter-spacing:.04em}
+h2{font-size:1.25rem}
+h3{font-size:1.05rem}
+p{margin:.5em 0}
+.muted{color:var(--ink-soft);font-size:.9rem}
+.center{text-align:center}
+.pic{font-size:3.2rem;text-align:center;line-height:1.2;margin:4px 0 10px;letter-spacing:.1em}
+.pageno{position:absolute;right:16px;bottom:10px;font-size:.8rem;color:var(--ink-soft)}
+
+.btn{
+  appearance:none;border:3px solid var(--ink);background:#fff8ec;border-radius:999px;
+  padding:12px 20px;font-size:1rem;font-weight:700;cursor:pointer;
+  box-shadow:0 4px 0 var(--ink);transition:transform .08s, box-shadow .08s;min-height:48px;
+  text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:6px;
+}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+.btn:disabled{opacity:.4;cursor:default;transform:none;box-shadow:0 4px 0 var(--ink)}
+.btn.primary{background:var(--rose)}
+.btn.sea{background:var(--sky)}
+.btn.dark{background:#2b2b2b;color:#fff;border-color:#111;box-shadow:0 4px 0 #111}
+.btn.big{font-size:1.1rem;padding:14px 26px;width:100%}
+.btn.small{font-size:.85rem;padding:6px 14px;min-height:36px;border-width:2px;box-shadow:0 3px 0 var(--ink)}
+.btn.objection{
+  background:var(--red);color:#fff;border-color:#7a2a20;box-shadow:0 5px 0 #7a2a20;
+  font-size:1.2rem;font-weight:900;letter-spacing:.06em;width:100%;
+}
+.btn.objection:active{box-shadow:0 1px 0 #7a2a20}
+.row{display:flex;gap:10px;align-items:center}
+.row.between{justify-content:space-between}
+.actions{margin-top:16px;display:flex;gap:10px}
+.actions .btn{flex:1}
+.actions.col{flex-direction:column}
+
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:8px}
+.lives{display:flex;gap:2px;font-size:1.35rem;line-height:1}
+.lives span{transition:filter .3s, transform .3s, opacity .3s}
+.lives span.lost{filter:grayscale(1);opacity:.25;transform:scale(.8)}
+.lives.hit{animation:pop .5s}
+.chip{background:var(--paper);border:2px solid var(--line);border-radius:999px;padding:2px 12px;font-size:.85rem;font-weight:700}
+
+.list{list-style:none;padding:0;margin:10px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.list li{background:#fff;border:2px dashed var(--line);border-radius:14px;padding:6px 10px;font-size:.92rem;display:flex;align-items:center;gap:6px}
+.list li.key{border:2.5px solid var(--rose-deep);background:#fff1ee;grid-column:1/-1}
+.list li.gone{text-decoration:line-through;color:var(--ink-soft);opacity:.7}
+.note{margin-top:10px;background:#fff;border-radius:14px;padding:10px 14px;border-left:6px solid var(--rose-deep);font-size:.92rem}
+.facts{margin:6px 0 0;padding-left:1.1em}
+.facts li{margin:4px 0}
+
+/* 家紋ふうの名札（正体がわからない顔） */
+.badge{
+  --c:#f6dcb0;
+  width:72px;height:72px;flex:none;border-radius:50%;
+  background:var(--c);border:3px solid var(--ink);box-shadow:0 3px 0 var(--ink);
+  display:flex;align-items:center;justify-content:center;position:relative;
+}
+.badge::before{content:"";position:absolute;inset:6px;border-radius:50%;border:2px dashed rgba(74,54,40,.45)}
+.badge span{font-size:1.7rem;font-weight:900;position:relative}
+.badge.sm{width:44px;height:44px;border-width:2px;box-shadow:0 2px 0 var(--ink)}
+.badge.sm::before{inset:4px;border-width:1.5px}
+.badge.sm span{font-size:1.05rem}
+.badge.shake{animation:shake .45s}
+.badge.down{animation:down .6s both}
+@keyframes shake{0%,100%{transform:none}20%{transform:translateX(-6px) rotate(-6deg)}40%{transform:translateX(6px) rotate(6deg)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+@keyframes down{0%{transform:none}40%{transform:scale(1.15) rotate(-8deg)}100%{transform:scale(.95)}}
+@keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.25)}100%{transform:scale(1)}}
+.cast{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+.cast .row{background:#fff;border-radius:16px;padding:8px 12px;border:2px solid var(--line);font-size:.92rem;line-height:1.6}
+.witness{display:flex;align-items:center;gap:14px}
+.wname{font-size:1.25rem;font-weight:900}
+.wsub{font-size:.85rem;color:var(--ink-soft)}
+
+.bubble{position:relative;margin-top:14px;background:#fff;border:3px solid var(--ink);border-radius:20px;padding:16px 18px 14px;min-height:128px;font-size:1.06rem}
+.bubble::before{content:"";position:absolute;top:-14px;left:32px;border:12px solid transparent;border-bottom-color:var(--ink);border-top:0}
+.bubble::after{content:"";position:absolute;top:-9px;left:35px;border:9px solid transparent;border-bottom-color:#fff;border-top:0}
+.bubble .num{font-size:.78rem;color:var(--ink-soft);font-weight:700;display:block;margin-bottom:2px}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:12px}
+.dots i{width:10px;height:10px;border-radius:50%;background:var(--line);display:block}
+.dots i.on{background:var(--rose-deep);transform:scale(1.2)}
+.nav{display:flex;gap:10px;margin-top:14px}
+.nav .btn{flex:1}
+.reaction{margin-top:12px;background:#fff1ee;border:2px solid var(--rose-deep);border-radius:16px;padding:10px 14px;font-size:.95rem}
+.reaction b{color:var(--red)}
+
+.seg{padding:10px 14px;border-radius:14px;margin-top:10px;background:#fff;border:2px solid var(--line)}
+.seg .tag{display:inline-block;font-size:.75rem;font-weight:900;border-radius:999px;padding:0 10px;margin-bottom:4px}
+.seg.honne .tag{background:var(--sky)}
+.seg.lie{border-color:var(--rose-deep);background:#fff4f1}
+.seg.lie .tag{background:var(--rose)}
+.seg.clue{border-color:var(--leaf-deep);background:#f3faee}
+.seg.clue .tag{background:var(--leaf)}
+.seg.fade{animation-duration:.5s}
+.explain{white-space:pre-line}
+.reveal-name{color:var(--red);font-weight:900}
+
+.stamp{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:50;pointer-events:none;background:rgba(251,243,226,.4)}
+.stamp span{font-size:3rem;font-weight:900;color:var(--red);border:7px solid var(--red);border-radius:20px;padding:6px 26px;background:rgba(255,255,255,.92);transform:rotate(-10deg);animation:stamp .5s cubic-bezier(.2,1.6,.4,1) both}
+.stamp.bad span{color:var(--ink-soft);border-color:var(--ink-soft);font-size:2.1rem}
+@keyframes stamp{from{transform:rotate(-10deg) scale(2.4);opacity:0}to{transform:rotate(-10deg) scale(1);opacity:1}}
+
+.modal{position:fixed;inset:0;z-index:40;background:rgba(74,54,40,.45);display:flex;align-items:flex-end;justify-content:center;animation:fadeOnly .2s both}
+@keyframes fadeOnly{from{opacity:0}to{opacity:1}}
+.sheet{width:100%;max-width:560px;max-height:88vh;max-height:88dvh;overflow:auto;background:var(--paper);border-radius:26px 26px 0 0;border:3px solid var(--line);border-bottom:0;padding:18px 16px calc(18px + env(safe-area-inset-bottom));animation:up .28s ease both}
+@keyframes up{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
+@media (min-width:600px){.modal{align-items:center}.sheet{border-radius:26px;border-bottom:3px solid var(--line)}}
+.quote{background:#fff;border-radius:14px;padding:8px 12px;font-size:.92rem;border-left:5px solid var(--red);margin:8px 0 12px}
+.ev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ev{appearance:none;border:2.5px solid var(--line);background:#fff;border-radius:16px;padding:10px 4px 8px;cursor:pointer;text-align:center;font-size:.78rem;font-weight:700;line-height:1.35;min-height:92px}
+.ev .ic{font-size:1.8rem;display:block;line-height:1.2;margin-bottom:4px}
+.ev.sel{border-color:var(--red);background:#fff1ee;box-shadow:0 0 0 3px rgba(217,96,79,.2)}
+.ev-detail{margin-top:12px;background:#fff;border-radius:16px;padding:12px 14px;border:2px solid var(--line);min-height:84px;font-size:.95rem}
+.ev-detail b{display:block;margin-bottom:2px}
+.memo h3{margin:16px 0 6px;font-size:1rem}
+.memo h3:first-of-type{margin-top:10px}
+.memo ul{margin:0;padding-left:1.2em;font-size:.92rem}
+.memo li{margin:3px 0}
+.ev-row{display:flex;gap:10px;align-items:flex-start;background:#fff;border-radius:12px;padding:8px 10px;margin:6px 0;font-size:.9rem}
+.ev-row .ic{font-size:1.5rem;line-height:1.2}
+
+.guess{margin-top:8px;background:#fff;border:2.5px dashed var(--sea);border-radius:16px;padding:12px 14px}
+.guess p{font-size:.9rem;margin:0 0 8px}
+.guess input{width:100%;font-size:1rem;padding:10px 12px;border-radius:12px;border:2px solid var(--line);background:#fffdf8}
+.guess .btn{margin-top:8px;width:100%}
+.guess .result{font-weight:700}
+
+.title-page{text-align:center;padding:34px 20px 26px}
+.title-page .pic{font-size:3.8rem}
+.title-page h1{font-size:1.85rem;margin:6px 0 4px}
+.title-page .sub{color:var(--ink-soft);font-size:.95rem;margin-bottom:22px}
+.wave{height:22px;margin:4px auto 16px;max-width:240px;background:radial-gradient(circle at 10px -4px, transparent 12px, var(--sky) 13px) 0 0/20px 22px repeat-x;opacity:.8}
+
+.qlabel{display:inline-block;background:var(--ink);color:var(--paper);border-radius:999px;padding:0 14px;font-size:.85rem;font-weight:700;margin-bottom:8px}
+
+/* エンディング */
+.mino-wrap{position:relative;height:110px;display:flex;align-items:center;justify-content:center}
+.mino{font-size:3.6rem}
+.mino.fall{animation:minoFall 1.4s ease both}
+@keyframes minoFall{0%{opacity:1;transform:none}100%{opacity:0;transform:translateY(50px) rotate(35deg)}}
+.speaker{font-weight:900;font-size:.9rem;color:var(--ink-soft)}
+.line{margin:10px 0}
+.line.say{background:#fff;border-radius:16px;padding:10px 14px;border:2px solid var(--line)}
+.owari{font-size:1.6rem;font-weight:900;letter-spacing:.3em;text-align:center;margin:20px 0 6px}
+
+.curtain{position:fixed;inset:0;background:#2a2018;z-index:45;pointer-events:none;animation:curtain 1.6s ease both}
+@keyframes curtain{0%{opacity:0}35%{opacity:1}65%{opacity:1}100%{opacity:0}}
+.book{
+  margin:6px auto 0;width:min(78vw,300px);aspect-ratio:3/4;border-radius:10px 18px 18px 10px;
+  background:linear-gradient(160deg,#fde3d9,#f7c6b8);border:4px solid var(--ink);
+  box-shadow:-10px 0 0 #c98b6f inset, 0 10px 0 rgba(74,54,40,.2);
+  position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  animation:bookIn 1.2s .6s cubic-bezier(.2,1.2,.4,1) both;transform-origin:left center;
+}
+@keyframes bookIn{from{opacity:0;transform:perspective(800px) rotateY(-90deg)}to{opacity:1;transform:none}}
+.book .cover-title{font-size:2.3rem;font-weight:900;letter-spacing:.12em;color:#7a2a20;margin-top:6px}
+.book .cover-art{width:62%}
+.book .cover-sub{font-size:.8rem;color:#7a4a3a;margin-top:4px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.card{perspective:700px;height:128px}
+.card .in{position:relative;width:100%;height:100%;transform-style:preserve-3d;animation:flip .8s ease forwards;animation-delay:var(--d)}
+@keyframes flip{to{transform:rotateY(180deg)}}
+.face{position:absolute;inset:0;border-radius:16px;border:2.5px solid var(--ink);background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;backface-visibility:hidden;-webkit-backface-visibility:hidden;font-size:.8rem;font-weight:700;text-align:center;padding:4px;line-height:1.3}
+.face.back{transform:rotateY(180deg);background:#fff6e8}
+.face .real{font-size:1rem;font-weight:900;color:var(--red)}
+.face .big{font-size:2.2rem;line-height:1.1}
+.face svg{width:58px;height:58px}
+.kid-big{width:150px;height:150px;margin:0 auto;display:block;animation:fade 1s .2s both}
+.share-note{font-size:.8rem;color:var(--ink-soft);text-align:center;margin-top:6px}
+
+/* おすすめ枠（PR） */
+.tabs{display:flex;gap:6px;margin:10px 0 4px;border-bottom:2px solid var(--line)}
+.tab{appearance:none;border:2px solid var(--line);border-bottom:0;background:#f5e7cc;border-radius:12px 12px 0 0;padding:6px 14px;font-size:.9rem;font-weight:700;cursor:pointer;margin-bottom:-2px}
+.tab.on{background:var(--paper);border-color:var(--line);color:var(--ink)}
+.pr-list{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+.pr-card{display:flex;gap:12px;align-items:center;background:#fff;border:2px solid var(--line);border-radius:16px;padding:10px 12px;text-decoration:none;color:inherit;position:relative;text-align:left}
+.pr-card:active{transform:translateY(1px)}
+.pr-cover{width:56px;height:76px;flex:none;border-radius:6px 10px 10px 6px;border:2px solid var(--ink);display:flex;align-items:center;justify-content:center;font-size:1.7rem;box-shadow:-4px 0 0 rgba(0,0,0,.12) inset}
+.pr-body{flex:1;min-width:0;font-size:.85rem;line-height:1.5}
+.pr-body b{font-size:.95rem;display:block}
+.pr-body .meta{color:var(--ink-soft);font-size:.78rem}
+.pr-tag{position:absolute;top:6px;right:8px;font-size:.68rem;font-weight:900;letter-spacing:.05em;color:#fff;background:var(--ink-soft);border-radius:6px;padding:0 6px;line-height:1.6}
+.pr-card.small{padding:8px 10px;gap:10px}
+.pr-card.small .pr-cover{width:40px;height:54px;font-size:1.2rem}
+.pr-card.small .pr-body{font-size:.8rem}
+.pr-head{font-size:.8rem;color:var(--ink-soft);margin:14px 0 4px;text-align:left}
+.ad-note{margin-top:auto;padding-top:18px;text-align:center;font-size:.75rem;color:var(--ink-soft)}
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+/* =========================================================
+   表に出してよいデータ（概要・証言・証拠）
+   ========================================================= */
+const EVIDENCE = [
+  {id:'dango',  no:'①', icon:'🍡', name:'仲間の旅だんご',   text:'若者は「仲間になるなら」と旅だんごをひとつずつ渡した。シロ・マシラ・ケーンは、それぞれひとつもらって仲間になった。'},
+  {id:'fune',   no:'②', icon:'⛵', name:'沖の島への船',     text:'沖の島は海の向こうにあり、船でしか渡れない。一行は船で渡り、船で帰ってきた。'},
+  {id:'ikusa',  no:'③', icon:'⚔️', name:'島での戦いぶり',   text:'シロは大男の足に食らいつき、マシラは飛びかかってかきむしり、ケーンは上から大男たちの目を突いた。'},
+  {id:'kousan', no:'④', icon:'🙇', name:'大男たちの降参',   text:'島の大男たちは泣いて謝り、二度と悪さをしないと誓って、自分から宝を差し出した。'},
+  {id:'kuruma', no:'⑤', icon:'🛞', name:'帰りの荷車',       text:'シロが前で引き、マシラが後ろから押し、ケーンが綱を引いた。若者は荷車の先を歩いた。'},
+  {id:'oitachi',no:'⑥', icon:'🌊', name:'若者の生い立ち',   text:'若者は、おばあさんが川で拾ってきた子。子のいなかったおじいさんとおばあさんが、わが子として大事に育てた。'},
+];
+const evById = id => EVIDENCE.find(e => e.id === id);
+
+const TREASURES = [['🥇','金の延べ棒'],['🥈','銀の延べ棒'],['🪸','珊瑚'],['🔮','瑪瑙の玉'],['🧵','宝の反物'],['🔨','打ち出の小槌'],['👒','隠れ笠']];
+const CAST = [
+  {badge:'若', c:'#f8e6b8', name:'若者', text:'おばあさんが育てた子。仲間を連れて沖の島へ渡り、島の大男たちを打ち負かした。仲間からは「若さま」と呼ばれる。'},
+  {badge:'シ', c:'#f4efe6', name:'シロ', text:'若者の最初の仲間。力持ち。'},
+  {badge:'マ', c:'#f3c9a6', name:'マシラ', text:'二番目の仲間。身軽ですばしっこい。'},
+  {badge:'ケ', c:'#cfe3c4', name:'ケーン', text:'三番目の仲間。いつも高いところから見張っている。'},
+  {badge:'ア', c:'#f4b9ad', name:'アカ', text:'沖の島に住む、赤ら顔の大男。'},
+];
+const badgeHTML = (b, c, cls='') => `<div class="badge ${cls}" style="--c:${c}"><span>${b}</span></div>`;
+
+const INTRO = [
+  {pic:'🏝️ ⛵', title:'むかしむかし', body:`
+    <p>若者は、シロ・マシラ・ケーンの仲間たちを連れて、海の向こうの<b>沖の島</b>へ渡りました。</p>
+    <p>島の大男たちを打ち負かし、たくさんの宝を持ち帰りました。</p>
+    <p>ところが──その宝が、<b>ひとつ足りない</b>のです。</p>`},
+  {pic:'', title:'登場する者たち', body:`<div class="cast">${CAST.map(c=>`<div class="row">${badgeHTML(c.badge,c.c,'sm')}<div><b>${c.name}</b><br>${c.text}</div></div>`).join('')}</div>`},
+  {pic:'🗺️', title:'あの日のこと', body:`
+    <ul class="facts">
+      <li>若者は旅に出る前、おばあさんから<b>手作りの旅だんご</b>を持たされた。</li>
+      <li>若者は道で出会った者に、<b>「仲間になるなら」と旅だんごをひとつずつ</b>渡した。シロ、マシラ、ケーンの順に、それぞれひとつもらって仲間になった。</li>
+      <li>沖の島は<b>海の向こう</b>にあり、<b>船でしか渡れない</b>。一行は船で渡り、船で帰ってきた。</li>
+      <li>島での戦いでは、シロは大男の足に<b>食らいつき</b>、マシラは飛びかかって<b>かきむしり</b>、ケーンは上から大男たちの<b>目を突いた</b>。</li>
+      <li>島の大男たちは<b>泣いて謝り、二度と悪さをしないと誓って、自分から宝を差し出した</b>。</li>
+      <li>帰り道、宝を積んだ荷車は、<b>シロが前で引き、マシラが後ろから押し、ケーンが綱を引いた</b>。若者は荷車の先を、旗を持って歩いた。</li>
+    </ul>`},
+  {pic:'🧺 🌊', title:'若者の生い立ち', body:`
+    <p>若者は、<b>おばあさんが川で拾ってきた子</b>です。</p>
+    <p>血はつながっていませんが、子のいなかったおじいさんとおばあさんが、<b>わが子として大事に育てました</b>。</p>`},
+  {pic:'📜', title:'宝の目録', body:`
+    <p>島の大男たちが差し出した目録の宝は、ぜんぶで <b>8品</b>。</p>
+    <ul class="list">${TREASURES.map(t=>`<li><span>${t[0]}</span>${t[1]}</li>`).join('')}<li class="key"><span>🌾</span><b>隠れ蓑</b></li></ul>
+    <div class="note">目録の注記：<br>「隠れ蓑……<b>着た者の姿を見えなくする蓑</b>」</div>`},
+  {pic:'⛵ ➜ 🏖️ ➜ 🛞 ➜ 🏠', title:'宝の運びかた', body:`
+    <p>宝は<b>筵（むしろ）にくるんで</b>沖の島で船に積み、村の浜で荷車に移して、家まで運びました。</p>
+    <p>軽い<b>隠れ蓑</b>と、若者の<b>残りの旅だんごの包み</b>は、筵の上に載せておきました。</p>`},
+  {pic:'🏠 ❓', title:'ひとつ、足りない', body:`
+    <p>家に着いてすぐ、おばあさんがみんなの前で宝を数えると……</p>
+    <ul class="list">${TREASURES.map(t=>`<li><span>${t[0]}</span>${t[1]}</li>`).join('')}<li class="key gone"><span>🌾</span>隠れ蓑</li></ul>
+    <p><b>7品しかありません。</b>隠れ蓑がなくなっていました。旅だんごの包みも消えていました。</p>`},
+  {pic:'🌅 ⛵', title:'翌朝のこと', body:`
+    <p>浜で見張っていたシロが、<b>島の舟で着いたばかりのアカ</b>を捕まえました。</p>
+    <p>アカは言います。<br>「<b>蓑を盗ったのは、わしじゃ</b>」</p>`},
+  {pic:'👵', title:'あなたは、おばあさん', body:`
+    <p>若者を育てたあなたが、この詮議を取り仕切ります。</p>
+    <p>シロ・マシラ・ケーン・アカの話を<b>1文ずつ</b>聞いて、おかしな文を見つけたら<b>「それ、おかしい！」</b>で証拠を突きつけましょう。</p>
+    <p>まちがえると <b>🍵ライフ</b> がひとつ減ります。ライフは <b>5つ</b>。</p>
+    <div class="note">この事件には、あなたの知っている<b>「あるお話」</b>がかくれているかもしれません。<br>気づいたら、手帳の「この事件の正体は？」に書きこんでみましょう（1回だけ）。</div>`},
+  {pic:'🧺', title:'手もとの証拠', body:`
+    <p>ここまでの話に出てきた、6つの事実です。</p>
+    ${EVIDENCE.map(e=>`<div class="ev-row"><span class="ic">${e.icon}</span><div><b>${e.no} ${e.name}</b><br>${e.text}</div></div>`).join('')}`},
+];
+
+const WITNESSES = [
+  {name:'シロ', badge:'シ', c:'#f4efe6', sub:'若者の最初の仲間',
+    statements:[
+      'おれは帰り道、ずっと荷車の後ろについて押していたから、荷台は家に着くまでずっと目の前にあった。',
+      '誰も荷台には触っていないし、おかしなことは何もなかった。',
+      'ただ、家に着いてから見たら、筵に小さな穴があいていた。あれはケーンが突いた跡だろう。',
+      '宝が足りないなら、最初から島の大男たちがごまかしたに決まっている。'],
+    wrongEvidence:['それがおれの話と、どう関係あるっていうんだ？','うーん、その証拠じゃ、おれの話はくずれないぞ！'],
+    wrongStatement:['そこはほんとうのことだぞ！','その話のどこがおかしいんだ？ おばあさん、しっかりしてくれよ。']},
+  {name:'マシラ', badge:'マ', c:'#f3c9a6', sub:'荷車を後ろから押していた',
+    statements:[
+      'おれは後ろから荷車を押してただけだ。',
+      '若さまの旅だんごの包みが消えたらしいが、おれは知らねえ。',
+      'だいたい、おれは旅だんごなんか一つももらったことがねえんだ。',
+      '若さまについてったのは、腕っぷしにほれたからさ。'],
+    wrongEvidence:['そんなもん見せられても、痛くもかゆくもねえや。','はずれ〜！ おれの話はそんなことじゃくずれねえよ。'],
+    wrongStatement:['そこはほんとだって！ うそじゃねえよ。','おいおい、そこにケチつけられても困るぜ。']},
+  {name:'ケーン', badge:'ケ', c:'#cfe3c4', sub:'綱を引いて見張っていた',
+    statements:[
+      'わたしは帰り道、綱を引いて、荷車の上のほうにおりました。',
+      'シロは筵の穴をわたしの仕業と言いますが、とんでもない。',
+      'わたしは生まれてこのかた、何かを突いたことなど一度もありません。',
+      'そんな乱暴をするのは、爪の長いマシラくらいのものです。'],
+    wrongEvidence:['その証拠が、わたしの何をあばくというのです？','見当ちがいですわ。'],
+    wrongStatement:['そこはまことの話です。うたがわないでください。','わたしはそこで、うそなどついておりません。']},
+  {name:'アカ', badge:'ア', c:'#f4b9ad', sub:'けさ島の舟で村に来た赤ら顔の大男',
+    statements:[
+      '隠れ蓑を盗ったのは、このわしじゃ。',
+      '宝を船に積むどさくさにまぎれて、蓑だけ抜いて島に隠した。',
+      'わしら島の者は降参などしておらん。だから取り返して何が悪い。',
+      '今朝この村に来たのも、残りの宝を取り返すためじゃ。'],
+    wrongEvidence:['ガハハ！ そんなもの、わしには何のことやらわからんわ。','ふん、そんな証拠でわしがひるむと思うたか。'],
+    wrongStatement:['そこに文句をつけても、わしが盗人であることは変わらんぞ。','そこは何もおかしくなかろう。']},
+];
+
+const FINALS = [
+  {label:'問1', title:'蓑は、どうやって消えた？',
+    prompt:'蓑と包みは、筵の下へ引きこまれるように消えた。<br><b>「仲間のだれかが、こっそり手を伸ばしたのではない」</b>と示せる証拠は？'},
+  {label:'問2', title:'筵の下の「だれか」は、どうやって乗りこんだ？',
+    prompt:'荷車は、浜を出たときから重かった。「だれか」は浜より前から、宝にまぎれていたことになる。<br>その「だれか」がどこから来たのかを示す証拠は？'},
+  {label:'問3', title:'その「だれか」は、いまどこにいる？',
+    prompt:'「だれか」が荷車を降りたのは、家の門の前。<br>親のいない「だれか」が<b>だれに会いに来たのか</b>を示す証拠は？'},
+  {label:'さいごに', title:'姿の見えない「だれか」に、呼びかけよう',
+    prompt:'「だれか」は筵の下で、あるものを食べていた。それを手に、やさしく呼びかけよう。'},
+];
+const FINAL_WRONG = ['うーん……その証拠では、話がつながらないようだ。','みんなが首をかしげている。もう一度考えてみよう。','……しーん。部屋は静まりかえったままだ。'];
+const GAME_TITLE = '沖の島の宝、ひとつ足りない';
+
+/* =========================================================
+   おすすめ作品（PR）
+   データは src/pr.mjs で編集し、組み立て直すこと（README.md 参照）。
+   SHELF と GAMEOVER はここに埋めこまれる。ENDING は読みにくくして SEC に入る。
+   ========================================================= */
+const PR = { SHELF: [
+    {
+      "title": "（仮）霧雨坂の証言録",
+      "author": "仮の作者A",
+      "genre": "法廷ミステリー",
+      "blurb": "食いちがう証言を、たった一つの事実で崩していく法廷劇。",
+      "url": "https://example.com/pr/shelf-1",
+      "icon": "⚖️",
+      "color": "#d8e4f0"
+    },
+    {
+      "title": "（仮）縁側の名探偵",
+      "author": "仮の作者B",
+      "genre": "日常ミステリー",
+      "blurb": "お茶をすすりながら町の小さな謎を解く、おばあちゃん探偵の連作。",
+      "url": "https://example.com/pr/shelf-2",
+      "icon": "🫖",
+      "color": "#f3e1c4"
+    },
+    {
+      "title": "（仮）灯台守は嘘をつく",
+      "author": "仮の作者C",
+      "genre": "孤島ミステリー",
+      "blurb": "嵐の夜、閉ざされた灯台で消えた航海日誌のゆくえは。",
+      "url": "https://example.com/pr/shelf-3",
+      "icon": "🗼",
+      "color": "#cfe3ea"
+    }
+  ], GAMEOVER: [
+    {
+      "title": "（仮）ひと休み探偵帖",
+      "author": "仮の作者D",
+      "genre": "ゆるミステリー",
+      "blurb": "行きづまったら、ひと休み。5分で読める謎解き短編集。",
+      "url": "https://example.com/pr/gameover-1",
+      "icon": "🍘",
+      "color": "#f1dcc0"
+    }
+  ], ENDING: [] };
+// おすすめ枠を出してよい画面（証言・崩したあと・最終推理では出さない）
+const PR_SCREENS = new Set(['gameover', 'recommend']);
+
+function prCardHTML(item, small){
+  return `<a class="pr-card ${small?'small':''}" href="${item.url}" target="_blank" rel="sponsored noopener" data-pr>
+    <span class="pr-tag">PR</span>
+    <div class="pr-cover" style="background:${item.color}">${item.icon}</div>
+    <div class="pr-body"><b>${item.title}</b><span class="meta">${item.author}／${item.genre}</span><br>${item.blurb}</div>
+  </a>`;
+}
+
+/* =========================================================
+   答え・崩したあとの証言・エンディング（読みにくくしてある）
+   ========================================================= */
+const BLOB = [
+  "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",
+  "Yg9mPtCR2r+t"
+];
+const SEC = (() => {
+  const bin = atob(BLOB.join(''));
+  const bytes = Uint8Array.from(bin, c => c.charCodeAt(0));
+  const key = new TextEncoder().encode('oki-no-shima');
+  for (let i = 0; i < bytes.length; i++) bytes[i] ^= key[i % key.length] ^ ((i * 7) & 255);
+  return JSON.parse(new TextDecoder().decode(bytes));
+})();
+PR.ENDING = SEC.prEnding || [];
+
+/* =========================================================
+   状態
+   ========================================================= */
+const MAX_LIVES = 5;
+const LIFE_ICON = '🍵';
+const S = {
+  screen:'title', page:0, w:0, s:0, lives:MAX_LIVES, clues:[], f:0,
+  reaction:null, endStep:0, missCount:0, hints:0,
+  guess:null,        // null=未回答 / {ok:true, tier} / {ok:false}
+  from:null,
+};
+const app = document.getElementById('app');
+const pick = arr => arr[Math.floor(Math.random()*arr.length)];
+
+/* 「この事件の正体は？」の判定 */
+function normalizeGuess(raw){
+  let s = String(raw || '').normalize('NFKC').toLowerCase();
+  s = s.replace(/[āâ]/g,'a').replace(/[īî]/g,'i').replace(/[ūû]/g,'u').replace(/[ēê]/g,'e').replace(/[ōô]/g,'o');
+  s = s.replace(/[\s　・･、。,.!！?？「」『』"'`（）()\[\]【】〜~_\-]/g, '');
+  s = s.replace(/[ァ-ヶ]/g, c => String.fromCharCode(c.charCodeAt(0) - 0x60));
+  for (const [a,b] of SEC.bonus.kanji) s = s.split(a).join(b);
+  return s;
+}
+function checkGuess(raw){
+  const s = normalizeGuess(raw);
+  return s.length > 0 && SEC.bonus.targets.some(t => s.includes(t));
+}
+const TIER_TITLES = ['千里眼のおばあさん','名探偵のおばあさん','物知りのおばあさん','勘のいいおばあさん'];
+
+/* =========================================================
+   描画
+   ========================================================= */
+function livesHTML(hit){
+  let h = '';
+  for (let i=0;i<MAX_LIVES;i++) h += `<span class="${i>=S.lives?'lost':''}">${LIFE_ICON}</span>`;
+  return `<div class="lives ${hit?'hit':''}" aria-label="ライフ ${S.lives}">${h}</div>`;
+}
+function topbar(label, hit){
+  return `<div class="topbar">${livesHTML(hit)}<span class="chip">${label}</span><button class="btn small" data-act="memo">📖 手帳</button></div>`;
+}
+function render(opts={}){
+  const fn = {title:rTitle, intro:rIntro, testimony:rTestimony, broken:rBroken, final:rFinal, finalOk:rFinalOk, ending:rEnding, gameover:rGameover, recommend:rRecommend}[S.screen];
+  let html = fn(opts);
+  if (!PR_SCREENS.has(S.screen)) html = html.replace(/<a class="pr-card[\s\S]*?<\/a>/g, ''); // 念のため
+  app.innerHTML = html + `<footer class="ad-note">広告を含みます</footer>`;
+  if (S.screen==='ending' && S.endStep>0 && !SEC.ending[S.endStep].top) window.scrollTo({top:document.body.scrollHeight, behavior:'smooth'});
+  else window.scrollTo({top:0});
+}
+
+function rTitle(){
+  return `<div class="page title-page fade">
+    <div class="pic">🏝️</div>
+    <div class="muted">証言くずし推理</div>
+    <h1>沖の島の宝、<br>ひとつ足りない</h1>
+    <div class="wave"></div>
+    <p class="sub">四つの証言から、<br>消えた「隠れ蓑」のゆくえを解き明かそう。</p>
+    <button class="btn primary big" data-act="start">ページをひらく</button>
+  </div>`;
+}
+function rIntro(){
+  const p = INTRO[S.page], last = S.page === INTRO.length-1;
+  return `<div class="page fade" style="min-height:60vh">
+    ${p.pic?`<div class="pic">${p.pic}</div>`:''}
+    <h2 class="center">${p.title}</h2>
+    <div style="margin-top:8px">${p.body}</div>
+    <div class="pageno">${S.page+1} / ${INTRO.length}</div>
+  </div>
+  <div class="actions">
+    <button class="btn" data-act="introPrev" ${S.page===0?'disabled':''}>◀ まえ</button>
+    <button class="btn ${last?'primary':''}" data-act="introNext">${last?'証言をきく ▶':'つぎ ▶'}</button>
+  </div>`;
+}
+function rTestimony(opts){
+  const w = WITNESSES[S.w];
+  const dots = w.statements.map((_,i)=>`<i class="${i===S.s?'on':''}"></i>`).join('');
+  const r = S.reaction ? `<div class="reaction fade"><b>${w.name}：</b>「${S.reaction}」</div>` : '';
+  return `${topbar(`証言 ${S.w+1} / 4`, opts.hit)}
+  <div class="page fade">
+    <div class="witness">${badgeHTML(w.badge, w.c, opts.hit?'shake':'')}<div><div class="wname">${w.name}の証言</div><div class="wsub">${w.sub}</div></div></div>
+    <div class="bubble"><span class="num">${S.s+1}文目 / ${w.statements.length}</span><span class="fade" style="display:block">「${w.statements[S.s]}」</span></div>
+    <div class="dots">${dots}</div>
+    ${r}
+    <div class="nav"><button class="btn" data-act="prevS">◀ まえ</button><button class="btn" data-act="nextS">つぎ ▶</button></div>
+    <div style="margin-top:12px"><button class="btn objection" data-act="object">それ、おかしい！</button></div>
+    <p class="muted center" style="margin:10px 0 0">おかしな文を見つけたら、証拠を突きつけよう。</p>
+  </div>`;
+}
+function rBroken(){
+  const w = WITNESSES[S.w], sw = SEC.w[S.w];
+  const tags = {honne:'本音', lie:'嘘をついた理由', clue:'手がかり'};
+  const segs = sw.broken.map((b,i)=>`<div class="seg ${b.t} fade" style="animation-delay:${.1+i*.35}s"><span class="tag">${tags[b.t]}</span><div>「${b.s}」</div></div>`).join('');
+  const last = S.w === WITNESSES.length-1;
+  return `${topbar(`証言 ${S.w+1} / 4`)}
+  <div class="page fade">
+    <div class="witness">${badgeHTML(w.badge, w.c, 'down')}<div><div class="wname">${w.name}の証言が崩れた！</div><div class="wsub">手がかりを手帳に書きとめた</div></div></div>
+    <div>${segs}</div>
+  </div>
+  <div class="actions"><button class="btn primary big" data-act="nextWitness">${last?'最終推理へ ▶':'つぎの証言者へ ▶'}</button></div>`;
+}
+function rFinal(opts){
+  const q = FINALS[S.f], lastQ = S.f === FINALS.length-1;
+  const r = S.reaction ? `<div class="reaction fade">${S.reaction}</div>` : '';
+  return `${topbar('最終推理', opts.hit)}
+  <div class="page fade">
+    <span class="qlabel">${q.label}</span>
+    <h2>${q.title}</h2>
+    <p style="margin-top:10px">${q.prompt}</p>
+    ${r}
+    <div style="margin-top:14px"><button class="btn objection" data-act="finalPick">${lastQ?'これで呼びかける！':'証拠を突きつける！'}</button></div>
+    <p class="muted center" style="margin:10px 0 0">手帳の「手がかり」も見返してみよう。</p>
+  </div>`;
+}
+function rFinalOk(){
+  const q = FINALS[S.f], sf = SEC.finals[S.f], e = evById(sf.answer);
+  return `${topbar('最終推理')}
+  <div class="page fade">
+    <span class="qlabel">${q.label}</span>
+    <h2>${q.title}</h2>
+    <div class="seg clue fade" style="margin-top:14px"><span class="tag">${e.icon} ${e.name}</span><div class="explain">${sf.explain}</div></div>
+  </div>
+  <div class="actions"><button class="btn primary big" data-act="finalNext">つぎへ ▶</button></div>`;
+}
+
+function shareURL(){
+  const lines = [`『${GAME_TITLE}』を解き明かしました！`, `のこりライフ ${LIFE_ICON.repeat(S.lives)}（まちがい ${S.missCount}回）`];
+  if (S.guess && S.guess.ok) lines.push(`称号：${TIER_TITLES[S.guess.tier]}`);
+  lines.push('#沖の島の宝');
+  let q = 'text=' + encodeURIComponent(lines.join('\n'));
+  if (/^https?:/.test(location.protocol)) q += '&url=' + encodeURIComponent(location.href.split('#')[0]);
+  return 'https://x.com/intent/tweet?' + q;
+}
+
+function rEnding(){
+  const steps = SEC.ending;
+  const cur = steps[S.endStep];
+  let html = '';
+  if (cur.mode === 'story'){
+    // 種明かし前：会話を積み重ねて表示（子どもの絵は出さない）
+    const shown = steps.slice(0, S.endStep+1).filter(e=>e.mode==='story');
+    html += `<div class="page fade"><div class="mino-wrap">${cur.kind==='mino' ? '<div class="mino fall">🌾</div>' : '<div class="mino" style="font-size:2.6rem">🍵</div>'}</div>`;
+    for (const e of shown){
+      if (e.kind==='say') html += `<div class="line say fade"><div class="speaker">${e.who}</div>「${e.s}」</div>`;
+      else html += `<p class="line fade">${e.s}</p>`;
+    }
+    html += `</div>`;
+  } else if (cur.mode === 'cover'){
+    html += `<div class="curtain"></div><div class="page center">
+      <p class="muted fade" style="animation-delay:1.4s">これまでのページが、一冊の絵本にまとまって──</p>
+      <div class="book"><div class="cover-art">${SEC.cover.svg}</div><div class="cover-title">${SEC.cover.title}</div><div class="cover-sub">${SEC.cover.sub}</div></div>
+      <p class="fade" style="animation-delay:2s;margin-top:14px">${cur.s}</p>
+    </div>`;
+  } else if (cur.mode === 'cards'){
+    html += `<div class="page"><h2 class="center">${cur.title}</h2><p class="muted center">${cur.s}</p>
+      <div class="cards">${SEC.cards.map((c,i)=>`<div class="card"><div class="in" style="--d:${.4+i*.35}s">
+        <div class="face">${badgeHTML(c.badge, c.c, 'sm')}<div>${c.fake}</div></div>
+        <div class="face back">${c.svg ? SEC[c.svg] : `<div class="big">${c.icon}</div>`}<div class="real">${c.real}</div></div>
+      </div></div>`).join('')}</div>
+      <p class="fade" style="animation-delay:${.6+SEC.cards.length*.35}s">${cur.after}</p>
+    </div>`;
+  } else if (cur.mode === 'recap'){
+    const t = S.guess && S.guess.ok ? TIER_TITLES[S.guess.tier] : '';
+    html += `<div class="page fade"><h2 class="center">${cur.title}</h2>
+      <p class="center" style="font-size:1.15rem;margin-top:10px">称号 <b class="reveal-name">${t}</b></p>
+      <ul class="facts">${SEC.recap.map(r=>`<li>${r}</li>`).join('')}</ul></div>`;
+  } else if (cur.mode === 'musubi'){
+    html += `<div class="page fade">${SEC.kid.replace('<svg','<svg class="kid-big"')}
+      ${cur.lines.map(l=>`<p class="line">${l}</p>`).join('')}
+      <div class="owari">おしまい</div>
+      <p class="center muted">のこったライフ ${LIFE_ICON.repeat(S.lives) || 'なし'}（まちがい ${S.missCount}回）${S.guess&&S.guess.ok?`<br>称号：${TIER_TITLES[S.guess.tier]}`:''}</p>
+    </div>`;
+  }
+  // 次へボタン（見破れなかった人には recap を飛ばす）
+  const done = S.endStep >= steps.length-1;
+  html += `<div class="actions col">${done
+    ? `<a class="btn dark big" href="${shareURL()}" target="_blank" rel="noopener" data-share>𝕏 結果をXでシェア</a>
+       <p class="share-note">シェア文には、事件の正体は入りません。</p>
+       <button class="btn sea big" data-act="recommend">この事件が好きな人へ ▶</button>
+       <button class="btn primary big" data-act="restart">もういちど はじめから</button>`
+    : `<button class="btn primary big" data-act="endNext">つぎへ ▶</button>`}</div>`;
+  return html;
+}
+function rRecommend(){
+  return `<div class="page fade">
+    <div class="pic">📚</div>
+    <h2 class="center">この事件が好きな人へ</h2>
+    <p class="muted center">証言を崩す楽しさを、もっと味わえる作品です。</p>
+    <div class="pr-list">${PR.ENDING.map(it=>prCardHTML(it)).join('')}</div>
+  </div>
+  <div class="actions col">
+    <button class="btn big" data-act="backToEnd">◀ エンディングにもどる</button>
+    <button class="btn primary big" data-act="restart">もういちど はじめから</button>
+  </div>`;
+}
+function rGameover(){
+  return `<div class="page fade center" style="padding:34px 20px 22px">
+    <div class="pic">🍂👵</div>
+    <h2>おばあさんは、すっかり<br>くたびれてしまいました……</h2>
+    <p class="muted" style="margin-top:12px">ライフがなくなりました。<br>お茶をひと口のんで、もういちど考えてみましょう。</p>
+    <p class="pr-head">ひと休みのおともに</p>
+    ${prCardHTML(PR.GAMEOVER[0], true)}
+  </div>
+  <div class="actions col">
+    <button class="btn primary big" data-act="retry">${S.from==='final'?'この問いから':'この証言から'} やりなおす</button>
+    <button class="btn big" data-act="restart">はじめから</button>
+  </div>`;
+}
+
+/* =========================================================
+   モーダル
+   ========================================================= */
+let modalEl = null;
+function closeModal(){ if (modalEl){ modalEl.remove(); modalEl = null; } }
+
+function openEvidencePicker(quoteHTML, okLabel, onPick){
+  closeModal();
+  let sel = null;
+  modalEl = document.createElement('div');
+  modalEl.className = 'modal';
+  const draw = () => {
+    const e = sel ? evById(sel) : null;
+    modalEl.innerHTML = `<div class="sheet" role="dialog" aria-label="証拠をえらぶ">
+      <div class="row between"><h3>どの証拠を突きつける？</h3><button class="btn small" data-m="close">とじる</button></div>
+      <div class="quote">${quoteHTML}</div>
+      <div class="ev-grid">${EVIDENCE.map(x=>`<button class="ev ${sel===x.id?'sel':''}" data-ev="${x.id}"><span class="ic">${x.icon}</span>${x.no}<br>${x.name}</button>`).join('')}</div>
+      <div class="ev-detail">${e ? `<b>${e.no} ${e.name}</b>${e.text}` : '<span class="muted">証拠をえらぶと、くわしい内容が出ます。</span>'}</div>
+      <div class="actions"><button class="btn objection" data-m="ok" ${sel?'':'disabled'}>${okLabel}</button></div>
+    </div>`;
+  };
+  draw();
+  modalEl.addEventListener('click', ev => {
+    if (ev.target === modalEl){ closeModal(); return; }
+    const b = ev.target.closest('button'); if (!b) return;
+    if (b.dataset.ev){ sel = b.dataset.ev; draw(); return; }
+    if (b.dataset.m === 'close'){ closeModal(); return; }
+    if (b.dataset.m === 'ok' && sel){ const s = sel; closeModal(); onPick(s); }
+  });
+  document.body.appendChild(modalEl);
+}
+
+function guessBoxHTML(){
+  const open = (S.screen==='testimony' || S.screen==='broken');
+  let inner;
+  if (S.guess && S.guess.ok) inner = `<p class="result">🌟 おばあさんは、何かに気づいたようだ……</p><p class="muted" style="margin:0">答えはエンディングで明かされます。</p>`;
+  else if (S.guess) inner = `<p class="result">……おばあさんの勘は、まだ霧の中のようだ。</p><p class="muted" style="margin:0">答えはエンディングで明かされます。</p>`;
+  else if (!open) inner = `<p class="muted" style="margin:0">最終推理が始まったので、もう答えられません。</p>`;
+  else inner = `<p>この事件には、あなたの知っている「あるお話」がかくれている。<br>そのお話の題名は？<span class="muted">（答えられるのは1回だけ。はずれてもライフは減りません）</span></p>
+    <input id="guessInput" type="text" inputmode="text" autocomplete="off" placeholder="お話の題名を書く" aria-label="お話の題名">
+    <button class="btn sea" data-m="guess">これで答える</button>`;
+  return `<h3>🔍 この事件の正体は？</h3><div class="guess">${inner}</div>`;
+}
+
+function openMemo(){
+  closeModal();
+  modalEl = document.createElement('div');
+  modalEl.className = 'modal';
+  let tab = 'memo';   // 開いたときは必ず「手帳」タブ。本棚は自分でタップしたときだけ出る
+  const draw = () => {
+    const tabs = `<div class="tabs" role="tablist">
+      <button class="tab ${tab==='memo'?'on':''}" data-tab="memo" role="tab">📖 手帳</button>
+      <button class="tab ${tab==='shelf'?'on':''}" data-tab="shelf" role="tab">📚 探偵の本棚</button>
+    </div>`;
+    if (tab === 'shelf'){
+      modalEl.innerHTML = `<div class="sheet memo" role="dialog" aria-label="探偵の本棚">
+        <div class="row between"><h3>おばあさんの手帳</h3><button class="btn small" data-m="close">とじる</button></div>
+        ${tabs}
+        <p class="muted" style="margin:8px 0 0">推理のひと休みに。おばあさんの本棚から。</p>
+        <div class="pr-list">${PR.SHELF.map(it=>prCardHTML(it)).join('')}</div>
+        <p class="ad-note">広告を含みます</p>
+      </div>`;
+      return;
+    }
+    const clues = S.clues.length ? `<ul>${S.clues.map(c=>`<li>${c}</li>`).join('')}</ul>` : '<p class="muted">まだ手がかりはありません。証言を崩すと、ここに書きとめられます。</p>';
+    modalEl.innerHTML = `<div class="sheet memo" role="dialog" aria-label="手帳">
+      <div class="row between"><h3>おばあさんの手帳</h3><button class="btn small" data-m="close">とじる</button></div>
+      ${tabs}
+      ${guessBoxHTML()}
+      <h3>事件の概要</h3>
+      <ul>
+        <li>目録の宝は8品。家で数えると7品で、<b>隠れ蓑</b>がない。</li>
+        <li>隠れ蓑は<b>着た者の姿を見えなくする</b>。</li>
+        <li>宝は筵にくるんで船 → 浜で荷車 → 家へ。蓑と旅だんごの包みは筵の上。</li>
+        <li>旅だんごの包みも消えた。</li>
+        <li>若者は荷車の先を歩いていた。</li>
+        <li>アカは翌朝、島の舟で着いたところを捕まった。</li>
+      </ul>
+      <h3>手がかり</h3>${clues}
+      <h3>証拠</h3>
+      ${EVIDENCE.map(e=>`<div class="ev-row"><span class="ic">${e.icon}</span><div><b>${e.no} ${e.name}</b><br>${e.text}</div></div>`).join('')}
+    </div>`;
+  };
+  draw();
+  const submit = () => {
+    const inp = modalEl.querySelector('#guessInput');
+    if (!inp || !inp.value.trim()) return;
+    if (checkGuess(inp.value)){
+      S.guess = {ok:true, tier:S.hints};
+      S.lives = MAX_LIVES;
+      stamp('ひらめいた！');
+    } else {
+      S.guess = {ok:false};
+    }
+    draw();
+    if (S.screen === 'testimony' || S.screen === 'broken') {
+      const top = app.querySelector('.lives'); if (top) top.outerHTML = livesHTML(true);
+    }
+  };
+  modalEl.addEventListener('click', ev => {
+    if (ev.target === modalEl || ev.target.closest('[data-m="close"]')){ closeModal(); return; }
+    const t = ev.target.closest('[data-tab]');
+    if (t){ tab = t.dataset.tab; draw(); return; }
+    if (ev.target.closest('[data-m="guess"]')) submit();
+  });
+  modalEl.addEventListener('keydown', ev => { if (ev.key === 'Enter' && ev.target.id === 'guessInput' && !ev.isComposing) submit(); });
+  document.body.appendChild(modalEl);
+}
+
+function stamp(text, bad){
+  const el = document.createElement('div');
+  el.className = 'stamp' + (bad?' bad':'');
+  el.innerHTML = `<span>${text}</span>`;
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(), bad?700:1100);
+}
+
+/* =========================================================
+   進行
+   ========================================================= */
+function loseLife(){
+  S.lives--; S.missCount++;
+  if (S.lives <= 0){
+    S.from = (S.screen==='final') ? 'final' : 'testimony';
+    S.screen = 'gameover'; S.reaction = null;
+    setTimeout(()=>render(), 700);
+    return true;
+  }
+  return false;
+}
+function onTestimonyPick(evId){
+  const w = WITNESSES[S.w], sw = SEC.w[S.w];
+  if (S.s === sw.contra && evId === sw.answer){
+    S.reaction = null;
+    stamp('崩れた！');
+    sw.clues.forEach(c => { if (!S.clues.includes(c)) S.clues.push(c); });
+    S.hints = Math.max(S.hints, sw.hint);
+    setTimeout(()=>{ S.screen='broken'; render(); }, 1000);
+    return;
+  }
+  S.reaction = (S.s === sw.contra) ? pick(w.wrongEvidence) : pick(w.wrongStatement);
+  stamp('ちがうようだ…', true);
+  if (!loseLife()) render({hit:true});
+}
+function onFinalPick(evId){
+  const sf = SEC.finals[S.f];
+  if (evId === sf.answer){
+    S.reaction = null;
+    if (S.f === FINALS.length-1){
+      stamp('出ておいで…');
+      setTimeout(()=>{ S.screen='ending'; S.endStep=0; render(); }, 1100);
+    } else {
+      stamp('そのとおり！');
+      setTimeout(()=>{ S.screen='finalOk'; render(); }, 1000);
+    }
+    return;
+  }
+  S.reaction = pick(FINAL_WRONG);
+  stamp('ちがうようだ…', true);
+  if (!loseLife()) render({hit:true});
+}
+function nextEndStep(){
+  let n = S.endStep + 1;
+  // 正体を見破っていない人には「見破ったあなたへ」を出さない
+  while (n < SEC.ending.length && SEC.ending[n].mode === 'recap' && !(S.guess && S.guess.ok)) n++;
+  if (n < SEC.ending.length){ S.endStep = n; render(); }
+}
+function restart(){
+  Object.assign(S, {screen:'title', page:0, w:0, s:0, lives:MAX_LIVES, clues:[], f:0, reaction:null, endStep:0, missCount:0, hints:0, guess:null, from:null});
+  render();
+}
+
+app.addEventListener('click', ev => {
+  const b = ev.target.closest('[data-act]'); if (!b || b.disabled) return;
+  const a = b.dataset.act, w = WITNESSES[S.w];
+  switch (a){
+    case 'start': S.screen='intro'; S.page=0; render(); break;
+    case 'introPrev': if (S.page>0){ S.page--; render(); } break;
+    case 'introNext':
+      if (S.page < INTRO.length-1){ S.page++; render(); }
+      else { S.screen='testimony'; S.w=0; S.s=0; render(); }
+      break;
+    case 'prevS': S.s = (S.s - 1 + w.statements.length) % w.statements.length; S.reaction=null; render(); break;
+    case 'nextS': S.s = (S.s + 1) % w.statements.length; S.reaction=null; render(); break;
+    case 'object': openEvidencePicker(`${w.name}「${w.statements[S.s]}」`, '突きつける！', onTestimonyPick); break;
+    case 'nextWitness':
+      if (S.w < WITNESSES.length-1){ S.w++; S.s=0; S.reaction=null; S.screen='testimony'; }
+      else { S.screen='final'; S.f=0; S.reaction=null; }
+      render(); break;
+    case 'finalPick': {
+      const q = FINALS[S.f];
+      openEvidencePicker(`<b>${q.label}</b> ${q.title}`, S.f===FINALS.length-1?'これで呼びかける！':'突きつける！', onFinalPick);
+      break;
+    }
+    case 'finalNext': S.f++; S.screen='final'; S.reaction=null; render(); break;
+    case 'endNext': nextEndStep(); break;
+    case 'memo': openMemo(); break;
+    case 'retry':
+      S.lives = MAX_LIVES; S.reaction = null;
+      S.screen = S.from==='final' ? 'final' : 'testimony';
+      if (S.screen==='testimony') S.s = 0;
+      render(); break;
+    case 'recommend': S.screen='recommend'; render(); break;
+    case 'backToEnd': S.screen='ending'; S.endStep=SEC.ending.length-1; render(); break;
+    case 'restart': restart(); break;
+  }
+});
+document.addEventListener('keydown', ev => { if (ev.key==='Escape') closeModal(); });
+
+render();
+</script>
+</body>
+</html>
