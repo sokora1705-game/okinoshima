@@ -378,47 +378,11 @@ const GAME_TITLE = '沖の島の宝、ひとつ足りない';
    データは src/pr.mjs で編集し、組み立て直すこと（README.md 参照）。
    SHELF と GAMEOVER はここに埋めこまれる。ENDING は読みにくくして SEC に入る。
    ========================================================= */
-const PR = { SHELF: [
-    {
-      "title": "（仮）霧雨坂の証言録",
-      "author": "仮の作者A",
-      "genre": "法廷ミステリー",
-      "blurb": "食いちがう証言を、たった一つの事実で崩していく法廷劇。",
-      "url": "https://example.com/pr/shelf-1",
-      "icon": "⚖️",
-      "color": "#d8e4f0"
-    },
-    {
-      "title": "（仮）縁側の名探偵",
-      "author": "仮の作者B",
-      "genre": "日常ミステリー",
-      "blurb": "お茶をすすりながら町の小さな謎を解く、おばあちゃん探偵の連作。",
-      "url": "https://example.com/pr/shelf-2",
-      "icon": "🫖",
-      "color": "#f3e1c4"
-    },
-    {
-      "title": "（仮）灯台守は嘘をつく",
-      "author": "仮の作者C",
-      "genre": "孤島ミステリー",
-      "blurb": "嵐の夜、閉ざされた灯台で消えた航海日誌のゆくえは。",
-      "url": "https://example.com/pr/shelf-3",
-      "icon": "🗼",
-      "color": "#cfe3ea"
-    }
-  ], GAMEOVER: [
-    {
-      "title": "（仮）ひと休み探偵帖",
-      "author": "仮の作者D",
-      "genre": "ゆるミステリー",
-      "blurb": "行きづまったら、ひと休み。5分で読める謎解き短編集。",
-      "url": "https://example.com/pr/gameover-1",
-      "icon": "🍘",
-      "color": "#f1dcc0"
-    }
-  ], ENDING: [] };
+const PR = { SHELF: [], GAMEOVER: [], ENDING: [] };
 // おすすめ枠を出してよい画面（証言・崩したあと・最終推理では出さない）
 const PR_SCREENS = new Set(['gameover', 'recommend']);
+// 載せる作品が1つもなければ、PRの枠も「広告を含みます」も出さない
+const HAS_PR = () => PR.SHELF.length + PR.GAMEOVER.length + PR.ENDING.length > 0;
 
 function prCardHTML(item, small){
   return `<a class="pr-card ${small?'small':''}" href="${item.url}" target="_blank" rel="sponsored noopener" data-pr>
@@ -594,21 +558,9 @@ const BLOB = [
   "CwhCbGhneXkfTxVXbyojM2ZxyJeIi/KU/fLgtICTya7w5+/0SwRGaGwFOnZ0GxYCF2U+cCo0nsjI3sL18/ji3ZT82Y7q6/P0",
   "UjBFVh0iYh5ydlhYSV9gISNEcdXQm8T29fyDsorXi9jn5ea55AEHSB5NV3xoDg0ITEhFJ2l5ep6JiJ6fqrDmyIzajNPa7tuy",
   "uKpTQxMGbDY9fjBcHmQRfTQzByzMgYbFk+7wrI6Ox9CN6qm6x7JLQhcUX2sYeHRGFBNeRmlYfSqbmpGbmK3+wPTz39+PhL2w",
-  "w763WxYOWDklayw1T1RTSVIqcFo2xdnM2Ie55+T2w5jIzPbq5/H9S0RaYBVuNjYsQ0kFQhDj+4r0rUUDR3kjLkA7ETxHOx1j",
-  "Bg58Uf2HvsSu1fuyzZ4BUBRRPmp0fZ3Kxd4TM2w/FhxEGydUCwXe9kJKRAMaOCJybXbM46XXzaP7nZUHYFIQD3onBGNLFRdR",
-  "FAql9LAOSxcCFGl2ebOp7N25/PGbv/RhRAd+FilFGykqJUQ9GmApQnUSuZ3886rA+r/Wxsqa4fWCv/idYAN5PSZiLiVVFUQx",
-  "HVcOSnkVtpLU8Jvj4LvS4cG/1sm7qvaDaQ9nOtDgpbeiuomWmdj/sO7r6VlLHw8hKjQzdQRHEEcnfnE7doaH1ZiXpu/+/o3B",
-  "3NPZ6ri+J+3z/FlQaSM0eEFaQRwWKWImc3eJkNiJo6H6qrrQz92R9qRvZwaI2dGX88WvsO7I3ZjVjqbvmr4IJW0bMn8nWFVD",
-  "JjtccSum86gJGxccHDphJnS00JDfs6HsooD/KGe6lf7iob6y2cWZzqxucBNx0dCT9OusguO37LzbvZnngKQxgMSC15u+oP3i",
-  "jU8ma1ENbmESFIjt5JPKpb3Zvd6Mht+oh+ee8AllLglJaSRITE0NY1UxYH0dDYzp1p/1gqHds9Ghqdi8iuOZ0A1pNgV1XSRR",
-  "UzIcdV8PeHkaHHDlzZvzjmRsOTteTh0CLWRzLGKfnc3fk7OttqDHgZDbnPur6uVPAgobWSQjMngKAgFdUGdtfiwyW2FbYO3k",
-  "/b+4hM3O1aiipf2qDlMYDGw1Lz12Xk5EW1Etejj7E3IcRV0rf1E2XxBDegBpLAJ77sKCgMGrt/1yeglNTkRjK2w6adQAQVkj",
-  "Rmo7LTZMfy/PrK+29A0NThNSMXy51L3BpobUy53/1UsDZX0fSGo4FxKKz4TW5vLi9bZVAp/MvL3o4bCliN6dx+WBzu1ubhx5",
-  "UCh/GDoNa0ExGGwlIXfymZ35uLXG07SgpsGMxumF8e1PdgZbdStBDj53SF09P2kQEX8Wo4H9rrHAxHlwCVVJGCwyYW5gnpeD",
-  "zdvg5aK1gsrU253n7PW8XBRPXgAoKzE/Ah8FVBBlJG1+NNHOC29cGTFgHJSImNTv6+vt8lBGHA58K3swYwpeIRoSKXFyZ5zK",
-  "xYfV/KOu8NfU1ZmG0KJ4VuyLoeSXy9iz1dnM4bwWYzj7nJEHYXoQDVkjGUNPIQOao65kWhCPpeCT99Sv2d3I5bQaXzRpdXqP",
-  "k4WN3+iZs+jDz83e2qq5h82yzd//UGNqvN7Vi6C+VU8sXTn5T0oSN0Dqr+Q3KzhTNTlsQRy2clYjXJbg6b7P+wQMWc2Nnfya",
-  "Yg9mPtCR2r+t"
+  "w763WxYOWDklayw1T1RTSVIqcFo2xdnM2Ie55+T2w5jIzPbq5/H9S0RaYDNgYD03QVlUWgh3ZXZxZIyJj4PpvoX6cDQmWTUC",
+  "ZAUAM+jp3OvObG92sKqhn7SyqJ+D8W1lHH9Lqu7+dDAiRTk+aAEEN+zlwOf+aGtyOjtCD05VPXU6Qz/GiJmd5q/ioZX3gFkZ",
+  "DK6r+nHupYHy9GkRdwsJgZqSmpWKODvCBGVgU0hJfEsujP6Y6KpmeDx2t+leXm2r3sO06q/f9pQiW0Zhlg=="
 ];
 const SEC = (() => {
   const bin = atob(BLOB.join(''));
@@ -663,7 +615,7 @@ function render(opts={}){
   const fn = {title:rTitle, intro:rIntro, testimony:rTestimony, broken:rBroken, final:rFinal, finalOk:rFinalOk, ending:rEnding, gameover:rGameover, recommend:rRecommend}[S.screen];
   let html = fn(opts);
   if (!PR_SCREENS.has(S.screen)) html = html.replace(/<a class="pr-card[\s\S]*?<\/a>/g, ''); // 念のため
-  app.innerHTML = html + `<footer class="ad-note">広告を含みます</footer>`;
+  app.innerHTML = html + (HAS_PR() ? `<footer class="ad-note">広告を含みます</footer>` : '');
   if (S.screen==='ending' && S.endStep>0 && !SEC.ending[S.endStep].top) window.scrollTo({top:document.body.scrollHeight, behavior:'smooth'});
   else window.scrollTo({top:0});
 }
@@ -795,7 +747,7 @@ function rEnding(){
   html += `<div class="actions col">${done
     ? `<a class="btn dark big" href="${shareURL()}" target="_blank" rel="noopener" data-share>𝕏 結果をXでシェア</a>
        <p class="share-note">シェア文には、事件の正体は入りません。</p>
-       <button class="btn sea big" data-act="recommend">この事件が好きな人へ ▶</button>
+       ${PR.ENDING.length ? `<button class="btn sea big" data-act="recommend">この事件が好きな人へ ▶</button>` : ''}
        <button class="btn primary big" data-act="restart">もういちど はじめから</button>`
     : `<button class="btn primary big" data-act="endNext">つぎへ ▶</button>`}</div>`;
   return html;
@@ -817,8 +769,8 @@ function rGameover(){
     <div class="pic">🍂👵</div>
     <h2>おばあさんは、すっかり<br>くたびれてしまいました……</h2>
     <p class="muted" style="margin-top:12px">ライフがなくなりました。<br>お茶をひと口のんで、もういちど考えてみましょう。</p>
-    <p class="pr-head">ひと休みのおともに</p>
-    ${prCardHTML(PR.GAMEOVER[0], true)}
+    ${PR.GAMEOVER.length ? `<p class="pr-head">ひと休みのおともに</p>
+    ${prCardHTML(PR.GAMEOVER[0], true)}` : ''}
   </div>
   <div class="actions col">
     <button class="btn primary big" data-act="retry">${S.from==='final'?'この問いから':'この証言から'} やりなおす</button>
@@ -878,7 +830,7 @@ function openMemo(){
   const draw = () => {
     const tabs = `<div class="tabs" role="tablist">
       <button class="tab ${tab==='memo'?'on':''}" data-tab="memo" role="tab">📖 手帳</button>
-      <button class="tab ${tab==='shelf'?'on':''}" data-tab="shelf" role="tab">📚 探偵の本棚</button>
+      ${PR.SHELF.length ? `<button class="tab ${tab==='shelf'?'on':''}" data-tab="shelf" role="tab">📚 探偵の本棚</button>` : ''}
     </div>`;
     if (tab === 'shelf'){
       modalEl.innerHTML = `<div class="sheet memo" role="dialog" aria-label="探偵の本棚">
